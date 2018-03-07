@@ -1,0 +1,36 @@
+{
+    "name": "this7/framework",
+    "description": "this7 PHP framework class.",
+    "license": "MIT",
+    "homepage": "https://github.com/this7/framework",
+    "keywords": [
+        "this7",
+        "this7 framework",
+        "php-frame"
+    ],
+    "authors": [
+    {
+        "name": "Yan Tianzeng",
+        "email": "qinuoyun@qq.com",
+        "homepage": "http://www.ub-u7.com/"
+    }],
+    "require":
+    {
+        "php": ">=5.6.0",
+        "this7/config": "dev-master",
+        "this7/debug": "dev-master",
+        "this7/routes": "dev-master",
+        "this7/logger": "dev-master",
+        "this7/cache": "dev-master",
+        "this7/sql": "dev-master",
+        "this7/util": "dev-master",
+        "this7/request": "dev-master"
+    },
+    "autoload":
+    {
+        "psr-4":
+        {
+            "this7\\framework\\": "src"
+        }
+    }
+}
