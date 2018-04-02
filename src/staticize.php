@@ -26,7 +26,7 @@ abstract class staticize {
     }
 
     public static function getAppAccessor() {
-        throw new \RuntimeException("外观没有实现getAppAccessor方法");
+        throw new \RuntimeException("未找到外观getAppAccessor方法");
     }
 
     protected static function resolveAppInstance($name) {
