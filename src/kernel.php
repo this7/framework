@@ -34,7 +34,7 @@ class kernel extends register {
         #设置静态化
         staticize::setApplication($this);
         #执行数据获取
-        $this->getPost();
+        $_POST = $this->getPost();
         #绑定核心驱动
         $this->bindDrives();
         #启动路由
