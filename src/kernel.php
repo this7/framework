@@ -33,36 +33,10 @@ class kernel extends register {
         spl_autoload_register(array($this, 'autoload'));
         #设置静态化
         staticize::setApplication($this);
-        #执行数据获取
-        $_POST = $this->getPost();
         #绑定核心驱动
         $this->bindDrives();
         #启动路由
         routes::start();
-    }
-
-    /**
-     * @Author   Sean       Yan
-     * @DateTime 2018-06-21
-     * @param    array      $data 路由数据
-     * @return   array            返回数组
-     */
-    public function getPost($data = []) {
-        if ($_POST) {
-            $data = $_POST;
-        } else {
-            $data = file_get_contents('php://input');
-        }
-        if (is_string($data)) {
-            parse_str($data, $query_arr);
-            return $query_arr;
-        } elseif (is_array($data)) {
-            return $data;
-        } elseif (is_json($data)) {
-            return to_array($data);
-        } else {
-            return $data;
-        }
     }
 
     public function autoload($class) {
