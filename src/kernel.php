@@ -11,7 +11,6 @@
  */
 namespace this7\framework;
 use \this7\config\config as This7Config;
-use \this7\debug\debug as This7Debug;
 
 /**
  * 框架基础配置文件
@@ -25,8 +24,6 @@ class kernel extends register {
     public function start() {
         #设置配置文件
         This7Config::defineConst();
-        #开启DEBUG错误
-        This7Debug::bootstrap();
         #获取驱动列表
         $this->drives = $this->getDeviceList(VENDOR_DIR . DS . 'this7');
         #自动加载类
