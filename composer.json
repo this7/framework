@@ -25,8 +25,8 @@
         "this7/sql": "3.*.*",
         "this7/util": "3.*.*",
         "this7/request": "3.*.*",
-        "this7/wechat": "3.0.*",
-        "this7/weapp": "3.0.*"
+        "this7/wechat": "3.*.*",
+        "this7/weapp": "3.*.*"
     },
     "autoload":
     {
