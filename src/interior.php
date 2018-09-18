@@ -98,30 +98,35 @@ class interior implements ArrayAccess {
      * @throws Exception
      */
     protected function build($className, $key = "") {
-        #匿名函数
-        if ($className instanceof Closure) {
-            #执行闭包函数-即外部驱动文件
-            return $className($this, $key);
-        }
-        #获取类信息
-        $reflector = new ReflectionClass($className);
-        #检查类是否可实例化, 排除抽象类abstract和对象接口interface
-        if (!$reflector->isInstantiable()) {
-            throw new Exception("$className 不能实例化.");
-        }
-        #获取类的构造函数
-        $constructor = $reflector->getConstructor();
-        #若无构造函数，直接实例化并返回
-        if (is_null($constructor)) {
-            return new $className;
-        }
-        #取构造函数参数,通过 ReflectionParameter 数组返回参数列表
-        $parameters = $constructor->getParameters();
-        #递归解析构造函数的参数
-        $dependencies = $this->getDependencies($parameters);
+        try {
+            #匿名函数
+            if ($className instanceof Closure) {
+                #执行闭包函数-即外部驱动文件
+                return $className($this, $key);
+            }
+            #获取类信息
+            $reflector = new ReflectionClass($className);
+            #检查类是否可实例化, 排除抽象类abstract和对象接口interface
+            if (!$reflector->isInstantiable()) {
+                throw new Exception("$className 不能实例化.", ErrorCode::$InstantiationError);
+            }
+            #获取类的构造函数
+            $constructor = $reflector->getConstructor();
+            #若无构造函数，直接实例化并返回
+            if (is_null($constructor)) {
+                return new $className;
+            }
+            #取构造函数参数,通过 ReflectionParameter 数组返回参数列表
+            $parameters = $constructor->getParameters();
+            #递归解析构造函数的参数
+            $dependencies = $this->getDependencies($parameters);
 
-        #创建一个类的新实例，给出的参数将传递到类的构造函数。
-        return $reflector->newInstanceArgs($dependencies);
+            #创建一个类的新实例，给出的参数将传递到类的构造函数。
+            return $reflector->newInstanceArgs($dependencies);
+        } catch (Exception $e) {
+            ERRORCODE($e);
+        }
+
     }
 
     /**
@@ -155,11 +160,15 @@ class interior implements ArrayAccess {
      * @return Object
      */
     protected function resolveNonClass($parameter) {
-        #有默认值则返回默认值
-        if ($parameter->isDefaultValueAvailable()) {
-            return $parameter->getDefaultValue();
+        try {
+            #有默认值则返回默认值
+            if ($parameter->isDefaultValueAvailable()) {
+                return $parameter->getDefaultValue();
+            }
+            throw new Exception('参数无默认值，无法实例化', ErrorCode::$InstantiationError);
+        } catch (Exception $e) {
+            ERRORCODE($e);
         }
-        throw new Exception('参数无默认值，无法实例化');
     }
 
     /**

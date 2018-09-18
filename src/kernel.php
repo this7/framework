@@ -11,6 +11,7 @@
  */
 namespace this7\framework;
 use \this7\config\config as This7Config;
+use \this7\debug\debug as This7Debug;
 
 /**
  * 框架基础配置文件
@@ -22,6 +23,8 @@ class kernel extends register {
      * @return [type] [description]
      */
     public function start() {
+        #设置DEBUG引导程序
+        (new This7Debug())->bootstrap();
         #设置配置文件
         This7Config::defineConst();
         #获取驱动列表
@@ -79,7 +82,7 @@ CON;
      * @return array 驱动列表
      */
     public function getDeviceList($dir) {
-        $path = array('.', '..', '.htaccess', '.DS_Store', 'controllers', 'config', 'framework');
+        $path = array('.', '..', '.htaccess', '.DS_Store', 'controllers', 'config', 'debug', 'framework');
         $ext  = array("php", "html", "htm");
         $list = array();
         if (is_dir($dir)) {

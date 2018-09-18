@@ -58,9 +58,6 @@ class register extends interior {
                 #延迟加载服务
                 $this->delays[$key] = $key;
             } else {
-                $array = array('name' => $key, 'file' => $build, 'time' => date("Y年m月d日 H:i:s"), 'id' => md5($key), 'mold' => 'system');
-                #静态数据存储
-                static_storage('loading', $array);
                 $this->class = $key;
                 $this->register(new driver($this), $key);
 
