@@ -15,16 +15,16 @@ namespace this7\framework;
  * 静态错误类
  */
 class ErrorCode {
-    public static $OK                 = 0;
-    public static $FrameSystemError   = -70001; // 框架系统错误
-    public static $FrameVariableError = -70002; // 框架变量错误
-    public static $InstantiationError = -70003; // 实例化错误
-    public static $FileDoesNotExist   = -70004; // 文件不存在
-    public static $ClassDoesNotExist  = -70005; // 类不存在
-    public static $EncryptAESError    = -70006;
-    public static $DecryptAESError    = -70007;
-    public static $IllegalBuffer      = -70008;
-    public static $EncodeBase64Error  = -70009;
-    public static $DecodeBase64Error  = -70010;
-    public static $GenReturnXmlError  = -70011;
+    public static $OK                    = 0;
+    public static $FrameSystemError      = -70001; // 框架系统错误
+    public static $FrameVariableError    = -70002; // 框架变量错误
+    public static $InstantiationError    = -70003; // 实例化错误
+    public static $FileDoesNotExist      = -70004; // 文件不存在
+    public static $ClassDoesNotExist     = -70005; // 类不存在
+    public static $submittedDataNotRmpty = -70006; // 提交数据不能为空
+    public static $DecryptAESError       = -70007;
+    public static $IllegalBuffer         = -70008;
+    public static $EncodeBase64Error     = -70009;
+    public static $DecodeBase64Error     = -70010;
+    public static $GenReturnXmlError     = -70011;
 }
